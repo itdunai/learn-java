@@ -1,18 +1,26 @@
 'use strict';
 
-// const answers = [];
+const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
 
-// answers[0] = prompt('Как выше имя?', '');
-// answers[1] = prompt('Как выше фамилия?', '');
-// answers[2] = prompt('Скок лет?', '');
+const presonalMovieDB = {
+        count: numberOfFilms,
+        movies: {},
+        actors: {},
+        genres: [],
+        privat: false  
+};
 
-// document.write(answers);
+const a = prompt('Один из последних просмотренных фильмов?', ''),
+      b = prompt('Насколько оцените его?', ''),
+      c = prompt('Один из последних просмотренных фильмов?', ''),
+      d = prompt('Насколько оцените его?', '');
 
-// const category = 'toys';
 
-// console.log(`https://someurl.com/${category}/5`);
+presonalMovieDB.movies[a] = b;
+presonalMovieDB.movies[c] = d;
+
+console.log(presonalMovieDB);
 
 
-// const user = 'Ivan';
 
-// alert(`Привет, ${user}`);
+
