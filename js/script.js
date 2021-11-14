@@ -31,8 +31,10 @@ if(presonalMovieDB.count < 10){
     console.log('Мало посмотрел');
 } else if (presonalMovieDB.count >= 10 && presonalMovieDB.count < 30) {
     console.log('Нормуль');
-} else if (presonalMovieDB.count > 30) {
+} else if (presonalMovieDB.count >= 30) {
     console.log('Конченый');
+} else {
+    console.log('ERROR');
 }
 
 console.log(presonalMovieDB);
