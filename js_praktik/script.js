@@ -218,6 +218,69 @@
 // =============== Получение элементов ======================
 
 
+// =============== События ======================
+
+// const btn = document.querySelector('button'),
+//       link = document.querySelector('a');
+
+// const notClick = (e) => {
+//     console.log(e.target);
+//     e.target.innerHTML = 'red';
+//     // btn.removeEventListener('click', notClick);
+// };
+
+// btn.addEventListener('click', notClick, {once : true});
+
+// link.addEventListener('click', function(e){
+//     e.preventDefault();
+//     console.log(e.target);
+//     link.style.color = 'red';
+// });
+
+
+// ======================== НАВИГАЦИЯ ПО DOM ====================
+
+// const wrapper= document.querySelector('.wrapper'),
+//       btns = wrapper.querySelectorAll('button'),
+//       first = wrapper.querySelector('.first'),
+//       second = wrapper.querySelector('.second');
+
+
+//     first.style.width = '300px';
+//     first.style.float = 'left';
+//     first.style.height = '200px';
+//     first.style.background = '#cdcdcd';
+//     first.style.padding = '50px';
+//     first.style.display = 'inline-block';
+
+//     second.style.width = '300px';
+//     second.style.height = '200px';
+//     second.style.float = 'left';
+//     second.style.background = '#cdcdcd';
+//     second.style.padding = '50px';
+//     second.style.display = 'inline-block';
+
+//     btns.forEach(item => {
+//         item.style.padding = '20px';
+//         item.style.background = 'yellow';
+//         item.innerHTML = 'Clikc me';
+//     });
+
+// console.log(document.querySelector('#current').parentNode.parentNode);
+// console.log(document.querySelector('[data-current="3"]').nextSibling);
+// console.log(document.querySelector('[data-current="3"]').nextElementSibling);
+// console.log(document.querySelector('[data-current="3"]').parentElement.className);
+
+// for (let node of document.body.childNodes){
+//     if (node.nodeName == '#text'){
+//         continue;
+//     }
+//     console.log(node);
+// }
+
+
+
+
 
 
 

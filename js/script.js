@@ -1,4 +1,4 @@
-/* Задания на урок:
+/* Задания на урок5:
 
 1) Удалить все рекламные блоки со страницы (правая часть сайта)
 
@@ -12,45 +12,117 @@
 
 5) Добавить нумерацию выведенных фильмов */
 
+/* Задания на урок 6:
+1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+новый фильм добавляется в список. Страница не должна перезагружаться.
+Новый фильм должен добавляться в movieDB.movies.
+Для получения доступа к значению input - обращаемся к нему как input.value;
+P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
+2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
+3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
+4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
+"Добавляем любимый фильм"
+5) Фильмы должны быть отсортированы по алфавиту */
+
 'use strict';
 
-const movieDB = {
-    movies: [
-        "Логан",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против..."
-    ]
-};
+document.addEventListener('DOMContentLoaded', () => {
+    const movieDB = {
+        movies: [
+            "Логан",
+            "Лига справедливости",
+            "Ла-ла лэнд",
+            "Одержимость",
+            "Скотт Пилигрим против..."
+        ]
+    };
+    
+    const promos = document.querySelectorAll('.promo__adv img'),
+          content = document.querySelector('.promo__content'),
+          bg = content.querySelector('.promo__bg'),
+          genre = content.querySelector('.promo__genre'),
+          filmsList = content.querySelector('.promo__interactive-list'),
+          addForm = document.querySelector('form.add'),
+          addInput= addForm.querySelector('.adding__input'),
+          checkbox = addForm.querySelector('[type="checkbox"]');
+    
+    addForm.addEventListener('submit', (event) =>{
+        event.preventDefault(); 
 
-const promos = document.querySelectorAll('.promo__adv img'),
-      content = document.querySelector('.promo__content'),
-      bg = content.querySelector('.promo__bg'),
-      genre = content.querySelector('.promo__genre'),
-      filmsList = content.querySelectorAll('.promo__interactive-item'),
-      films = movieDB.movies.sort();
+        let newFilm = addInput.value;
+        const favorite = checkbox.checked;
+        
+        if(newFilm){
 
-promos.forEach(item => {
-    item.remove();
+            if(newFilm.length > 21){
+                newFilm = `${newFilm.substring(0,22)}...`;
+            }
+            if(favorite) {
+                console.log('Добавляем любимый фильм');
+            }
+            
+            movieDB.movies.push(newFilm);
+            
+            createMovieList(movieDB.movies,filmsList);
+        }
+
+        event.target.reset();
+    });
+
+    const deleteAdv = (arr) => {
+        arr.forEach(item => {
+            item.remove();
+        });
+    };
+    
+    const sortArr = (arr) => {
+        arr.sort();
+    };
+    // for (let i = 0; i < promos.length; i++){
+    //     promos[i].remove();
+    // }
+    const makeChenges = () => {
+        // genre.textContent = 'ДРАМА';
+        // bg.style.backgroundImage = `url(img/bg.jpg)`;
+        genre.innerHTML = 'ДРАМА';
+        bg.style.cssText = `background: url(img/bg.jpg);background-size:100%`;
+    };
+    
+    function createMovieList(films, parentFilm) {
+        
+        parentFilm.innerHTML = "";
+        sortArr(films);   
+        
+        films.forEach((film, i) => {
+            parentFilm.innerHTML += `
+                <li class="promo__interactive-item">${i + 1} ${film}
+                    <div class="delete"></div>
+                </li>
+            `;
+        });
+
+        document.querySelectorAll('.delete').forEach((btn, i) => {
+
+            btn.addEventListener('click', () => {
+                btn.parentElement.remove();
+                movieDB.movies.splice(i,1);
+                createMovieList(films,filmsList);
+            });
+
+        });
+    }
+    
+    
+    // movieDB.movies.sort();
+    
+    // movieDB.movies.forEach((film, i) => {
+    //     filmsList[i].innerHTML = `${i + 1}. ${films[i]}`;
+    // });
+
+    deleteAdv(promos);
+    makeChenges();
+    createMovieList(movieDB.movies,filmsList);
+    
 });
-// for (let i = 0; i < promos.length; i++){
-//     promos[i].remove();
-// }
-
-genre.innerHTML = 'ДРАМА';
-// genre.textContent = 'ДРАМА';
-
-bg.style.cssText = `background: url(img/bg.jpg);background-size:100%`;
-// bg.style.backgroundImage = `url(img/bg.jpg)`;
 
 
-for (let i = 0; i < filmsList.length; i++){
-    filmsList[i].innerHTML = `<span></span>${i + 1}. ${films[i]}`;
-}
-
-// movieDB.movies.sort();
-
-// movieDB.movies.forEach((film, i) => {
-//     filmsList[i].innerHTML = `${i + 1}. ${films[i]}`;
-// });
